@@ -4,6 +4,10 @@
 2. CRA
 3. React Router, Mobx, Babel, Webpack, React, EsLint, HRM?
 
+# 문제점
+- 스프링 서버 재부팅 안하고 뷰만 변경
+- 해시가 달라질 경우 스프링 서버 재부팅 해야함  => 스프링 devtools 사용
+- 리액트 라우터 사용
 
 # Spring Boot + Security
 
@@ -38,14 +42,20 @@ package.json
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "customize-cra": "^0.9.1",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
     "react": "^16.13.0",
+    "react-app-rewired": "^2.1.5",
     "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build ",
+    "postbuild": "@powershell rm -r -Force ../resources/static/* && @powershell mv -Force build/* ../resources/static ",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -62,8 +72,21 @@ package.json
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "prettier": "1.19.1"
   }
 }
+
 
 ```
 
@@ -145,3 +168,27 @@ root에 jsconfig.json
     }
 }
 ```
+
+
+manifest
+
+웹앱 매니페스트란 앱에 대한 정보를 담고 JSON 파일입니다. 배경색은 어떠한 색인지, 앱의 이름은 무엇인지, 홈스크린 화면에 추가할 때 아이콘은 어떤 것인지 등의 정보를 담고 있죠. 웹앱 매니페스트는 manifest.json 파일명을 대부분 사용합니다.
+
+```
+short_name: 사용자 홈 화면에서 아이콘 이름으로 사용
+name: 웹앱 설치 배너에 사용
+icons: 홈 화면에 추가할때 사용할 이미지
+start_url: 웹앱 실행시 시작되는 URL 주소
+display: 디스플레이 유형(fullscreen, standalone, browser 중 설정)
+theme_color: 상단 툴바의 색상
+background_color: 스플래시 화면 배경 색상
+orientation: 특정 방향을 강제로 지정(landscape, portrait 중 설정)
+
+```
+
+서비스워커(Service Worker)
+
+서비스워커는 브라우저의 백그라운드에서 실행되는 자바스크립트 워커입니다. PWA는 네이티브 앱처럼 오프라인 상태에서도 사용가능하고, 푸시 알림(Notification) 기능도 사용할 수 있는데요. 이런 기능을 할 수 있도록 도와주는 것이 바로 서비스워커입니다. 향후에는 서비스워커에 지오펜싱(Geofencing) 기능도 추가될 예정이라고 하네요.
+
+
+이 부분 잘모름 

@@ -1,12 +1,15 @@
-package main.java.xyz.bumbing.springreact.controller;
+package xyz.bumbing.springreact.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
  
-    @GetMapping("/{name}.html")
-    public String page(@PathVariable String name, Model model) {
-        model.addAttribute("pageName", name);
-        return "index";
+    @GetMapping("/")
+    public String page(Model model) {
+        return "index.html";
     }
  
 }

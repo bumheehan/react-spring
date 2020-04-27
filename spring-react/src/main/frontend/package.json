@@ -17,13 +17,15 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired build ",
+    "postbuild": "@powershell rm build/static/**/*.map &&@powershell rm -r -Force ../resources/static/* && @powershell mv -Force build/* ../resources/static ",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
+  "homepage": "/",
   "browserslist": {
     "production": [
       ">0.2%",
